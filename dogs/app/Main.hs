@@ -21,6 +21,8 @@ import Control.Monad.IO.Class (liftIO)
 import Data.Time
 import Control.Monad.Logger
 
+import Web.Scotty
+
 connStr = "host=localhost dbname=dogsdb user=postgres"
 
 application req respond = do
@@ -34,6 +36,7 @@ main = runStdoutLoggingT $ withPostgresqlPool connStr 10 $ \pool ->
      liftIO $ flip runSqlPersistMPool pool $ do
         printMigration migrateAll
         --runMigration migrateAll
+
         res  :: [Entity Person] <- selectList [] [LimitTo 1]
         res1 :: [Entity Dog] <- selectList [] [LimitTo 1]
         liftIO $ print res

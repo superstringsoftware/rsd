@@ -45,6 +45,7 @@ executable dogs-exe
                      ,  time
                      ,  monad-logger
                      ,  persistent-template
+                     ,  scotty
   default-language:    Haskell2010
 
 test-suite dogs-test
