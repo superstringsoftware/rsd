@@ -7,7 +7,6 @@ module Main where
 import Data.Text
 import Data.Aeson
 
-import Lib
 import Entities
 
 import Network.Wai
@@ -32,12 +31,15 @@ application req respond = do
 
 -- main = run 3000 application
 
+main :: IO ()
 main = runStdoutLoggingT $ withPostgresqlPool connStr 10 $ \pool ->
-     liftIO $ flip runSqlPersistMPool pool $ do
-        printMigration migrateAll
-        --runMigration migrateAll
+     liftIO $ flip runSqlPersistMPool pool $ mainLoop
 
-        res  :: [Entity Person] <- selectList [] [LimitTo 1]
-        res1 :: [Entity Dog] <- selectList [] [LimitTo 1]
-        liftIO $ print res
-        liftIO $ print res1
+mainLoop = do
+    printMigration migrateAll
+    --runMigration migrateAll
+
+    res  :: [Entity Person] <- selectList [] [LimitTo 1]
+    res1 :: [Entity Dog] <- selectList [] [LimitTo 1]
+    liftIO $ print res
+    liftIO $ print res1
