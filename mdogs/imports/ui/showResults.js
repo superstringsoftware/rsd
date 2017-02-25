@@ -6,7 +6,7 @@ import './result.js';
 
 import { Results } from '../api/results.js';
 
-Template.body.helpers({
+Template.showResults.helpers({
 
   results() {
       return Results.find({}, { sort: { createdAt: -1 } });
@@ -15,7 +15,7 @@ Template.body.helpers({
 });
 
 
-Template.body.events({
+Template.showResults.events({
     'submit .new-task'(event) {
 
     // Prevent default browser form submit
