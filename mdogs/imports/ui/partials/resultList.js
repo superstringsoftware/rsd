@@ -8,8 +8,10 @@ import { Results } from '../../api/results.js';
 Template.resultList.helpers({
 
   results() {
-      res = Results.find({}, { sort: { createdAt: -1 } });
-      console.log(res);
+      var tt = Session.get("current-showID");
+      //console.log ("Session is " + tt + " and type is " + (typeof tt));
+      res = Results.find({"showID": tt}, { sort: { createdAt: -1 } });
+      //console.log(res);
       return res;
   }
 

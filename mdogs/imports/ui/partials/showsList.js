@@ -17,5 +17,10 @@ Template.showsList.helpers({
 
 Template.showsList.events({
 
+    'click .showLine'(evt) {
 
+        curSh = parseInt(evt.currentTarget.getAttribute("data-showID"));
+        Session.set("current-showID", curSh);
+        //console.log(Session.get("current-showID"));
+    },
 });
