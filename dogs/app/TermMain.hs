@@ -31,9 +31,9 @@ mainLoop = do
     printMigration migrateAll
     --runMigration migrateAll
 
-    res  :: [Entity Person] <- selectList [] [LimitTo 1]
-    res1 :: [Entity Dog] <- selectList [] [LimitTo 1]
-    liftIO $ print res
+    res  :: [Entity Person] <- selectList [] []
+    res1 :: [Entity Dog] <- selectList [] []
+    mapM_ (liftIO . print . entityVal) res
     liftIO $ print res1
 
 -- converts maybe text into text

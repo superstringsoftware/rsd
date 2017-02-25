@@ -1,4 +1,4 @@
-NAME,ID,Owner ID,Co-owner ID,Sex,Pedigree,Pedigree №,Father ID,Mother ID,Link,Tattoo,Chip,DOB,Breeder ID,Co-Breeder ID,Color
+Name,ID,ownerID,coOwnerID,sex,pedigree,pedigreeNo,fatherID,motherID,link,tattoo,chip,dob,breederID,cobreederID,color
 Stenveyz Rock Never Die,1,1,,male,,,2,3,,ABD 596,,27.10.2015,2,,black
 Flatterhaft Dynacraft On Line,2,2,6,male,,,,,,,,,3,,liver
 Almanza This Is Happiness,3,2,6,female,,,,,,,,,4,5,black

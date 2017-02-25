@@ -1,4 +1,4 @@
-ID,Dog ID,Show ID,Class,Mark,Place,Certificate,Critique,Age result,Breed result,Group result,BIS result
+ID,dogID,showID,class,mark,place,certificate,critique,ageResult,breedResult,groupResult,bisResult
 1,1,1,baby,absent,,,,,,,
 2,6,1,puppy,very perspective,1,,,,Best male puppy,,
 3,7,1,junior,excellent,2,ЮСС,,,,,
