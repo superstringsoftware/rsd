@@ -10,3 +10,16 @@ Template.registerHelper("dogNameFromID",
       //console.dir(dg);
       return dg.Name;
  });
+
+
+Template.registerHelper("dogFromID",
+   (dogID) => {
+       //console.log ( (typeof dogID) + " " + dogID)
+       return Dogs.findOne({"ID": dogID});
+});
+
+Template.registerHelper("getCurrentDog",
+    () => {
+        dogID = Session.get("current-dogID");
+        return Dogs.findOne({"ID": dogID});
+});

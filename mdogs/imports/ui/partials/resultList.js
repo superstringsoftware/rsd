@@ -20,5 +20,15 @@ Template.resultList.helpers({
 
 Template.resultList.events({
 
+    'click .resultLine'(evt) {
+
+        let curDog = parseInt(evt.currentTarget.getAttribute("data-dogID"));
+        Session.set("current-dogID", curDog);
+
+        //curSh = Shows.findOne{}
+
+        FlowRouter.go('showDogRoute', { _id: curDog });
+        //console.log(Session.get("current-dogID"));
+    },
 
 });

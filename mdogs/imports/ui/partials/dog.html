@@ -1,0 +1,10 @@
+<template name="dog">
+    <h1>Dog</h1>
+    {{#with getCurrentDog}}
+    {{Name}}, {{sex}}, {{color}}, {{pedigree}} {{pedigreeNo}}
+    <br/>
+    Born on {{dob}}
+    <br/>
+    Tatoo: {{tattoo}}
+    {{/with}}
+</template>

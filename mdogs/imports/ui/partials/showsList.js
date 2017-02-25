@@ -21,6 +21,10 @@ Template.showsList.events({
 
         curSh = parseInt(evt.currentTarget.getAttribute("data-showID"));
         Session.set("current-showID", curSh);
+
+        //curSh = Shows.findOne{}
+
+        FlowRouter.go('showResultsRoute', { _id: curSh });
         //console.log(Session.get("current-showID"));
     },
 });
