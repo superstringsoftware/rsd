@@ -3,6 +3,16 @@ import { Template } from 'meteor/templating';
 import '../imports/ui/body.js';
 import { Dogs } from '../imports/api/dogs.js';
 
+import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { render } from 'react-dom';
+
+import App from '../imports/ui/App.jsx';
+
+Meteor.startup(() => {
+  render(<App />, document.getElementById('render-target'));
+});
+
 Template.registerHelper("dogNameFromID",
   (dogID) => {
       //console.log ( (typeof dogID) + " " + dogID)
