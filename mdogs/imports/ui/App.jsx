@@ -9,7 +9,7 @@ import SimpleCollection from './universal/SimpleCollection.jsx';
 
 export default createContainer(() => {
   return {
-    items: Shows.find({}).fetch(),
+    items: People.find({}).fetch(),
     depItems: [Shows.find({}).fetch()],
     collection: Shows,
   };
