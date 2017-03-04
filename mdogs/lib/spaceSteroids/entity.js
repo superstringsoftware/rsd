@@ -1,12 +1,25 @@
 export class Entity {
 
-    constructor(fields, collection) {
-        this.fields = fields;
+    constructor(collection, fields) {
+        this._fields = fields;
         this._collection = collection;
         /*
         fields should be an array of field names and field types - for type checking etc
-        [{fname: '...', ftype: '...'}, ...]
+        [{fname: '...', ftype: '...'}, ...] -- e.g.
+        {fname: "ownerID", ftype: "entity", eclass: "Person"},
         */
+    }
+
+    toShortString(ent) {
+        return ent.toString();
+    }
+
+    setFields(fields) {
+        this._fields = fields;
+    }
+
+    get fields() {
+        return this._fields;
     }
 
     get fieldNames() {
@@ -33,5 +46,9 @@ export class Entity {
 
     remove(item) {
         this.collection.remove({_id: item._id});
+    }
+
+    findOne(sel) {
+        return this.collection.findOne(sel);
     }
 }

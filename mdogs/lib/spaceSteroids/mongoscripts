@@ -1,0 +1,11 @@
+{
+    dogobjs = db.dogs.find();
+    while (dogobjs.hasNext()) {
+        dg = dogobjs.next();
+        f = db.people.findOne({ID: dg.cobreederID});
+        if (f) {
+            dg.cobreederID = f._id;
+            db.dogs.update({_id: dg._id}, dg);
+        }
+    }
+}

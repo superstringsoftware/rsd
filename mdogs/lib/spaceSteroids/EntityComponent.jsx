@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import { SelectComponent } from './SelectComponent.jsx';
+
 export class EntityComponent extends Component {
 
     /*
@@ -97,11 +99,30 @@ export class EntityComponent extends Component {
         let isEdited = this.state.isEdited;
         let isNew = this.state.isNew;
 
-        this.props.entity.fieldNames.forEach( function (k, index) {
-            let value = item[k].toString();
-            if (isEdited === false) cells.push ( <td key={index}>{value}</td>);
-            else cells.push ( <td key={index}><input name={k} type="text" value={value} onChange={this.handleChange} /></td>);
+        this.props.entity.fields.forEach( function (k, index) {
+            let value = item[k.fname].toString();
+            if (isEdited === false) {
+                if (k.ftype === 'entity') {
+                    //console.log(k);
+                    let ent = k.eclass.findOne({_id: item[k.fname]});
+                    //console.log(ent);
+                    if (ent) cells.push ( <td key={index}>{k.eclass.toShortString(ent)}</td>);
+                    else cells.push ( <td key={index}></td>);
+                } else {
+                    cells.push ( <td key={index}>{value}</td>);
+                }
+            }
+            else {
+                if (k === 'fatherID') {
+                    cells.push (
+                        <td key={index}>
+                            <SelectComponent items={this.props.depItems} selectedValue={value} valueFieldName='ID' displayFieldName='Name' />
+                        </td>
 
+                    );
+                }
+                else cells.push ( <td key={index}><input name={k} type="text" value={value} onChange={this.handleChange} /></td>);
+            }
         },
         this);
 
