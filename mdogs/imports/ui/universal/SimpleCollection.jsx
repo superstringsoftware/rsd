@@ -2,51 +2,24 @@ import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
 class LineItem extends Component {
-    render() {
-        let cells = [];
-        let item = this.props.item;
-        let isEditable = this.props.isEditable;
-
-        Object.getOwnPropertyNames(item).forEach( function(k, index) {
-            if (k !== '_id') {
-                cells.push ( <td key={index}>{item[k].toString()}</td>);
-            }
-        });
-
-        /*
-        const cells = Object.getOwnPropertyNames(this.props.item).map((k, index) =>
-        // Only do this if items have no stable IDs
-
-        <td key={index}>
-        {this.props.item[k].toString()}
-    </td>
-
-); */
-
-
-return (
-    <tr className="showLine" data-showID={this.props.item.ID}>
-        {cells}
-    </tr>
-);
-}
-}
-
-class EditableLineItem extends Component {
 
     constructor(props) {
         super(props);
         this.state = { item: props.item, isEdited: false};
 
+        this.originalItem = {};
+
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleDoubleClick = this.handleDoubleClick.bind(this);
     }
 
     handleDoubleClick(event) {
         console.log("double click");
+        // setting row to editable and saving current state of the item to be able to handle rollback
+        Object.assign(this.originalItem, this.state.item);
         this.setState ({isEdited: true});
+
     }
 
     // in reality, this is onKeyUp !!! - otherwise Esc won't work
@@ -56,12 +29,13 @@ class EditableLineItem extends Component {
         console.log(kc);
         if (kc === 13) {
             // saving item
-            this.props.collection.update({_id: this.state.item._id}, this.state.item);
+            //this.props.collection.update({_id: this.state.item._id}, this.state.item);
+            this.props.collection.upsert({_id: this.state.item._id}, this.state.item);
             this.setState ({isEdited: false});
         }
         if (kc === 27) {
-            // need logic to get back to the state that was there before editing
-            this.setState ({isEdited: false});
+            // restoring to the original
+            this.setState ({isEdited: false, item: this.originalItem});
         }
 
     }
@@ -81,46 +55,28 @@ class EditableLineItem extends Component {
         //console.log(this.state);
     }
 
-    handleSubmit(event) {
-        //event.preventDefault();
-        console.log('Submit clicked');
-        //console.log(event.target);
-        console.log(this.state);
-
-        this.props.collection.update({_id: this.state.item._id}, this.state.item);
-
-    }
-
     render() {
         let cells = [];
         let item = this.state.item;
         let isEdited = this.state.isEdited;
 
-        if (isEdited === false) {
-
-            Object.getOwnPropertyNames(item).forEach( function(k, index) {
-                if (k !== '_id') {
+        Object.getOwnPropertyNames(item).forEach( function(k, index) {
+            if (k !== '_id') {
+                if (isEdited === false) {
                     cells.push ( <td key={index}>{item[k].toString()}</td>);
-                }
-            });
-        }
-        else {
-            Object.getOwnPropertyNames(item).forEach( function(k, index) {
-                if (k !== '_id') {
+                } else {
                     cells.push ( <td key={index}>
-                        <input name={k} type="text" value={item[k].toString()} onChange={this.handleChange} onKeyUp={this.handleKeyPress} />
+                        <input name={k} type="text" value={item[k].toString()} onChange={this.handleChange} />
                     </td>);
                 }
-            }, this);
-        }
+            }
+        }, this);
 
-
-
-    return (
-        <tr className="showLine" onDoubleClick={this.handleDoubleClick}>
-            {cells}
-        </tr>
-    );
+        return (
+            <tr className="showLine" onDoubleClick={this.handleDoubleClick} onKeyUp={this.handleKeyPress}>
+                {cells}
+            </tr>
+        );
 }
 }
 
@@ -128,13 +84,13 @@ class LineHeader extends Component {
     render() {
         let cells = [];
         if (this.props.item !== undefined) {
-            cells = Object.getOwnPropertyNames(this.props.item).map((k, index) =>
-            // Only do this if items have no stable IDs
-            <th key={index}>
-                {k}
-            </th>
+            Object.getOwnPropertyNames(this.props.item).forEach( function(k, index) {
+                if (k !== '_id') {
+                    cells.push (<th key={index}>{k}</th>);
+                }
+            }
         );
-    }
+        }
 
     return (
         <tr className="showLine">
@@ -162,7 +118,7 @@ export default class SimpleCollection extends Component {
     renderItems() {
         console.log(this.props);
         return this.props.items.map((item) => (
-            <EditableLineItem key={item._id} item={item} collection={this.props.collection} />
+            <LineItem key={item._id} item={item} collection={this.props.collection} />
         ));
     }
 
