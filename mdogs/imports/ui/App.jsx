@@ -3,12 +3,15 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Shows } from '../api/shows.js';
 import { Dogs } from '../api/dogs.js';
+import { People } from '../api/people.js';
 
 import SimpleCollection from './universal/SimpleCollection.jsx';
 
 export default createContainer(() => {
   return {
-    items: Dogs.find({}).fetch(),
+    items: Shows.find({}).fetch(),
+    depItems: [Shows.find({}).fetch()],
+    collection: Shows,
   };
 }, SimpleCollection);
 
