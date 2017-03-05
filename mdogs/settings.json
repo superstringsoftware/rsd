@@ -1,0 +1,7 @@
+{
+  "galaxy.meteor.com": {
+     "env": {
+       "MONGO_URL": "mongodb://flatadmin:av_star@candidate.55.mongolayer.com:10305,candidate.56.mongolayer.com:10449/flatdb?replicaSet=set-5628bcdc903035aebb000152"
+     }
+   }
+}

@@ -1,3 +1,5 @@
+require("react/package.json")
+
 import { Template } from 'meteor/templating';
 
 import '../imports/ui/body.js';
