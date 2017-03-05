@@ -1,8 +1,9 @@
 export class Entity {
 
-    constructor(collection, fields) {
+    constructor(collection, fields, defaultSort) {
         this._fields = fields;
         this._collection = collection;
+        this._defaultSort = defaultSort;
         /*
         fields should be an array of field names and field types - for type checking etc
         [{fname: '...', ftype: '...'}, ...] -- e.g.
@@ -16,6 +17,10 @@ export class Entity {
 
     setFields(fields) {
         this._fields = fields;
+    }
+
+    get defaultSort() {
+        return this._defaultSort;
     }
 
     get fields() {
@@ -56,7 +61,7 @@ export class Entity {
         return this.collection.findOne(sel);
     }
 
-    find(sel) {
-        return this.collection.find(sel);
+    find(sel, opts) {
+        return this.collection.find(sel, opts);
     }
 }

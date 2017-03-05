@@ -155,7 +155,7 @@ export class EntityComponent extends Component {
             }
             else {
                 if (k.ftype === 'entity') {
-                    depItems = k.eclass.find({}).fetch();
+                    depItems = k.eclass.find({}, {sort: k.eclass.defaultSort}).fetch();
                     //console.log ("Processing display update! value is " + value);
                     //debugger
                     //if (value) value = value.toHexString();

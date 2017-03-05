@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "babel-runtime": "6.18.0",
-    "bcrypt": "^1.0.2",
+
     "meteor-node-stubs": "~0.2.0",
     "node-pre-gyp": "^0.6.33",
     "react": "^15.4.2",
@@ -15,7 +15,9 @@
   },
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+      "bcrypt": "^1.0.2"
+  },
   "author": "",
   "license": "ISC",
   "description": ""

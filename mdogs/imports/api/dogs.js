@@ -1,6 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 
-export const Dogs = new Mongo.Collection('dogs');
+export const Dogs = new Mongo.Collection('dogs', {idGeneration: 'MONGO'});
 
 import {Entity} from '../../lib/spaceSteroids/entity.js';
 
@@ -24,7 +24,7 @@ Dogs.allow({
   },
 });
 
-export var DogEntity = new Entity(Dogs);
+export var DogEntity = new Entity(Dogs, {}, [ ["Name", "asc"], ["dob", "desc"] ]);
 DogEntity.setFields(
 [
     {fname: "Name", ftype: "string"},

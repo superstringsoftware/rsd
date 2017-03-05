@@ -11,7 +11,8 @@ export var PersonEntity = new Entity(People, [
     {fname: "country", ftype: "string"},
     {fname: "contact", ftype: "string"},
     {fname: "link", ftype: "string"},
-]);
+],
+[ ["name", "asc"]]);
 
 PersonEntity.toShortString = function(ent) {
     return ent.name;

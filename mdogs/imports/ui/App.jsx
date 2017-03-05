@@ -10,7 +10,7 @@ import SimpleCollection from './universal/SimpleCollection.jsx';
 export default createContainer(() => {
   return {
     entity: DogEntity,
-    items: Dogs.find({}).fetch(),
+    items: Dogs.find({}, {sort: [ ["Name", "asc"], ["dob", "desc"] ] }).fetch(),
     depItems: {
         Dog: Dogs.find({}).fetch(),
         Person: People.find({}).fetch()
