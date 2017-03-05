@@ -37,7 +37,11 @@ export class Entity {
     }
 
     update(item) {
-        this.collection.update({_id: item._id}, item);
+        upd = {};
+        Object.assign(upd, item);
+        delete upd._id;
+        //console.log(upd);
+        this.collection.update({_id: item._id}, {$set: upd});
     }
 
     create(item) {
