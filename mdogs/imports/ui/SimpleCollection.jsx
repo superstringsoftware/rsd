@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { EntityComponent } from '../../../lib/spaceSteroids/EntityComponent.jsx';
+import { EntityComponent } from '../../lib/spaceSteroids/EntityComponent.jsx';
 
 class LineHeader extends Component {
     constructor(props) {
