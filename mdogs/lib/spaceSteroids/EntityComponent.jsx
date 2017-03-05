@@ -153,21 +153,36 @@ export class EntityComponent extends Component {
                     cells.push ( <td key={index}>{value}</td>);
                 }
             }
-            else {
-                if (k.ftype === 'entity') {
-                    depItems = k.eclass.find({}, {sort: k.eclass.defaultSort}).fetch();
-                    //console.log ("Processing display update! value is " + value);
-                    //debugger
-                    //if (value) value = value.toHexString();
-                    cells.push (
-                        <td key={index}>
-                            <SelectComponent items={depItems} name={k.fname} selectedValue={value} entity={k.eclass}
-                                valueFieldName='_id' displayFieldName='Name' onChange={this.handleSelectChange} />
-                        </td>
+            else { // item being edited
+                switch (k.ftype) {
+                    case 'entity':
+                        depItems = k.eclass.find({}, {sort: k.eclass.defaultSort}).fetch();
+                        //console.log ("Processing display update! value is " + value);
+                        //debugger
+                        //if (value) value = value.toHexString();
+                        cells.push (
+                            <td key={index}>
+                                <SelectComponent items={depItems} name={k.fname} selectedValue={value} entity={k.eclass}
+                                    valueFieldName='_id' displayFieldName='Name' onChange={this.handleSelectChange} />
+                            </td>
 
-                    );
+                        );
+                        break;
+                    case 'list':
+                        let sel = k.list.map( (it) => <option value={it}>{it}</option> );
+                        cells.push (
+                            <td key={index}>
+                                 <select value={value} className="form-control" onChange={this.handleChange} name={k.fname}>
+                                     {sel}
+                                 </select>
+                            </td>
+                        );
+                        break;
+                    default:
+                        cells.push ( <td key={index}><input name={k.fname} type="text" value={value} onChange={this.handleChange} className="form-control" /></td>);
+                        break;
                 }
-                else cells.push ( <td key={index}><input name={k.fname} type="text" value={value} onChange={this.handleChange} className="form-control" /></td>);
+
             }
         },
         this);

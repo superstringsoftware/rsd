@@ -31,7 +31,7 @@ DogEntity.setFields(
     //{fname: "ID", ftype: "number"},
     {fname: "ownerID", ftype: "entity", eclass: PersonEntity},
     {fname: "coOwnerID", ftype: "entity", eclass: PersonEntity},
-    {fname: "sex", ftype: "string"},
+    {fname: "sex", ftype: "list", list: ["male", "female"]},
     {fname: "pedigree", ftype: "string"},
     {fname: "pedigreeNo", ftype: "string"},
     {fname: "fatherID", ftype: "entity", eclass: DogEntity},
@@ -44,7 +44,7 @@ DogEntity.setFields(
 
     {fname: "breederID", ftype: "entity", eclass: PersonEntity},
     {fname: "cobreederID", ftype: "entity", eclass: PersonEntity},
-    {fname: "color", ftype: "string"},
+    {fname: "color", ftype: "list", list: ["black", "liver", "yellow"]},
 ]);
 
 DogEntity.toShortString = function(ent) {
