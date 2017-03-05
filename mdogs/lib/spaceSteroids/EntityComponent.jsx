@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { EJSON } from 'meteor/ejson';
 
 import { SelectComponent } from './SelectComponent.jsx';
 
@@ -27,6 +28,7 @@ export class EntityComponent extends Component {
         this.originalItem = {};
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSelectChange = this.handleSelectChange.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleDoubleClick = this.handleDoubleClick.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -78,12 +80,33 @@ export class EntityComponent extends Component {
 
     }
 
-    handleChange(event) {
+    handleSelectChange(event) {
         //this.setState({value: event.target.value});
         console.log(event.target);
         const target = event.target;
         const value = target.value;
         const name = target.name;
+
+        console.log(name + " = " + value + " is " + (typeof value));
+        id = new Mongo.ObjectID(value);
+        console.log(id);
+
+        // not sure if this copying doesnot trigger update of all item fields???
+        let upd = {item: this.state.item};
+        upd.item[name] = id;
+        this.setState( upd );
+
+        console.log(this.state);
+    }
+
+    handleChange(event) {
+        //this.setState({value: event.target.value});
+        //console.log(event.target);
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        //console.log(name + " = " + value + " is " + (typeof value));
 
         // not sure if this copying doesnot trigger update of all item fields???
         let upd = {item: this.state.item};
@@ -100,7 +123,7 @@ export class EntityComponent extends Component {
         let isNew = this.state.isNew;
 
         this.props.entity.fields.forEach( function (k, index) {
-            let value = item[k.fname].toString();
+            const value = item[k.fname];
             if (isEdited === false) {
                 if (k.ftype === 'entity') {
                     //console.log(k);
@@ -113,15 +136,19 @@ export class EntityComponent extends Component {
                 }
             }
             else {
-                if (k === 'fatherID') {
+                if (k.ftype === 'entity') {
+                    depItems = k.eclass.find({}).fetch();
+                    console.log ("Processing display update! value is " + value);
+                    //debugger
+                    //if (value) value = value.toHexString();
                     cells.push (
                         <td key={index}>
-                            <SelectComponent items={this.props.depItems} selectedValue={value} valueFieldName='ID' displayFieldName='Name' />
+                            <SelectComponent items={depItems} name={k.fname} selectedValue={value} valueFieldName='_id' displayFieldName='Name' onChange={this.handleSelectChange} />
                         </td>
 
                     );
                 }
-                else cells.push ( <td key={index}><input name={k} type="text" value={value} onChange={this.handleChange} /></td>);
+                else cells.push ( <td key={index}><input name={k.fname} type="text" value={value} onChange={this.handleChange} className="form-control" /></td>);
             }
         },
         this);

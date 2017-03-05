@@ -51,4 +51,8 @@ export class Entity {
     findOne(sel) {
         return this.collection.findOne(sel);
     }
+
+    find(sel) {
+        return this.collection.find(sel);
+    }
 }
