@@ -26,6 +26,7 @@ class LineHeader extends Component {
 
     return (
         <tr className="showLine">
+            <th></th>
             {cells}
         </tr>
     );

@@ -32,6 +32,35 @@ export class EntityComponent extends Component {
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleDoubleClick = this.handleDoubleClick.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleEsc = this.handleEsc.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+    }
+
+    handleEsc(event) {
+        if (this.state.isNew === true) {
+            this.setState ({item: this.props.entity.createEmptyItem()});
+        }
+        else {
+        // restoring to the original
+            this.setState ({isEdited: false, item: this.originalItem});
+        }
+    }
+
+    handleSave(event) {
+        // saving item
+        //this.props.collection.update({_id: this.state.item._id}, this.state.item);
+        //this.props.collection.upsert({_id: this.state.item._id}, this.state.item);
+        if (this.state.isNew === true) {
+            console.log("Saving new item");
+            console.log(this.state.item);
+            // entity should handle validation etc
+            this.props.entity.create(this.state.item);
+            this.setState ({item: this.props.entity.createEmptyItem()});
+        }
+        else {
+            this.props.entity.update(this.state.item);
+            this.setState ({isEdited: false});
+        }
     }
 
     handleDelete(event) {
@@ -40,8 +69,9 @@ export class EntityComponent extends Component {
     }
 
     handleDoubleClick(event) {
-        console.log("double click");
+        //console.log("double click");
         // setting row to editable and saving current state of the item to be able to handle rollback
+        this.originalItem = {};
         Object.assign(this.originalItem, this.state.item);
         this.setState ({isEdited: true});
 
@@ -53,29 +83,10 @@ export class EntityComponent extends Component {
         const kc = event.keyCode;
         //console.log(kc);
         if (kc === 13) {
-            // saving item
-            //this.props.collection.update({_id: this.state.item._id}, this.state.item);
-            //this.props.collection.upsert({_id: this.state.item._id}, this.state.item);
-            if (this.state.isNew === true) {
-                console.log("Saving new item");
-                console.log(this.state.item);
-                // entity should handle validation etc
-                this.props.entity.create(this.state.item);
-                this.setState ({item: this.props.entity.createEmptyItem()});
-            }
-            else {
-                this.props.entity.update(this.state.item);
-                this.setState ({isEdited: false});
-            }
+            this.handleSave();
         }
         if (kc === 27) {
-            if (this.state.isNew === true) {
-                this.setState ({item: this.props.entity.createEmptyItem()});
-            }
-            else {
-            // restoring to the original
-                this.setState ({isEdited: false, item: this.originalItem});
-            }
+            this.handleEsc();
         }
 
     }
@@ -122,6 +133,13 @@ export class EntityComponent extends Component {
         let isEdited = this.state.isEdited;
         let isNew = this.state.isNew;
 
+        if (isEdited === false) cells.push(<td key="buttons"><button type="button" className="btn btn-danger btn-xs" onClick={this.handleDelete}>del</button></td>);
+        else cells.push(
+            <td key="buttons">
+                <button type="button" className="btn btn-warning btn-xs" onClick={this.handleEsc}>esc</button>
+                <button type="button" className="btn btn-success btn-xs" onClick={this.handleSave}>save</button>
+            </td>);
+
         this.props.entity.fields.forEach( function (k, index) {
             const value = item[k.fname];
             if (isEdited === false) {
@@ -138,12 +156,13 @@ export class EntityComponent extends Component {
             else {
                 if (k.ftype === 'entity') {
                     depItems = k.eclass.find({}).fetch();
-                    console.log ("Processing display update! value is " + value);
+                    //console.log ("Processing display update! value is " + value);
                     //debugger
                     //if (value) value = value.toHexString();
                     cells.push (
                         <td key={index}>
-                            <SelectComponent items={depItems} name={k.fname} selectedValue={value} valueFieldName='_id' displayFieldName='Name' onChange={this.handleSelectChange} />
+                            <SelectComponent items={depItems} name={k.fname} selectedValue={value} entity={k.eclass}
+                                valueFieldName='_id' displayFieldName='Name' onChange={this.handleSelectChange} />
                         </td>
 
                     );
@@ -152,9 +171,6 @@ export class EntityComponent extends Component {
             }
         },
         this);
-
-        if (isEdited === false) cells.push(<td><button type="button" className="btn btn-danger btn-xs" onClick={this.handleDelete}>del</button></td>);
-        else cells.push(<td></td>);
 
         return (
             <tr className="showLine" onDoubleClick={this.handleDoubleClick} onKeyUp={this.handleKeyPress}>
