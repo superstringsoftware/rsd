@@ -6,6 +6,24 @@ import {Entity} from '../../lib/spaceSteroids/entity.js';
 
 import {PersonEntity} from './people.js';
 
+import {Auth} from '../../lib/spaceSteroids/users/auth.js';
+
+
+Dogs.allow({
+  insert: function (userId, doc) {
+    // the user must be logged in, and the document must be owned by the user
+    return Auth.checkAdmin(userId);
+  },
+  update: function (userId, doc, fields, modifier) {
+    // can only change your own documents
+    return Auth.checkAdmin(userId);
+  },
+  remove: function (userId, doc) {
+    // can only remove your own documents
+    return Auth.checkAdmin(userId);
+  },
+});
+
 export var DogEntity = new Entity(Dogs);
 DogEntity.setFields(
 [
