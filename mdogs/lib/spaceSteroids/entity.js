@@ -36,13 +36,13 @@ export class Entity {
     }
 
     createEmptyItem() {
-        item = {};
+        let item = {};
         this.fieldNames.forEach( (k)=>item[k]='' );
         return item;
     }
 
     update(item) {
-        upd = {};
+        let upd = {};
         Object.assign(upd, item);
         delete upd._id;
         //console.log(upd);

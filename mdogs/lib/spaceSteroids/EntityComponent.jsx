@@ -51,8 +51,8 @@ export class EntityComponent extends Component {
         //this.props.collection.update({_id: this.state.item._id}, this.state.item);
         //this.props.collection.upsert({_id: this.state.item._id}, this.state.item);
         if (this.state.isNew === true) {
-            console.log("Saving new item");
-            console.log(this.state.item);
+            //console.log("Saving new item");
+            //console.log(this.state.item);
             // entity should handle validation etc
             this.props.entity.create(this.state.item);
             this.setState ({item: this.props.entity.createEmptyItem()});
@@ -64,7 +64,7 @@ export class EntityComponent extends Component {
     }
 
     handleDelete(event) {
-        console.log("deleting");
+        //console.log("deleting");
         this.props.entity.remove(this.state.item);
     }
 
@@ -93,12 +93,12 @@ export class EntityComponent extends Component {
 
     handleSelectChange(event) {
         //this.setState({value: event.target.value});
-        console.log(event.target);
+        //console.log(event.target);
         const target = event.target;
         const value = target.value;
         const name = target.name;
 
-        console.log(name + " = " + value + " is " + (typeof value));
+        //console.log(name + " = " + value + " is " + (typeof value));
         id = new Mongo.ObjectID(value);
         console.log(id);
 
@@ -107,7 +107,7 @@ export class EntityComponent extends Component {
         upd.item[name] = id;
         this.setState( upd );
 
-        console.log(this.state);
+        //console.log(this.state);
     }
 
     handleChange(event) {
@@ -156,7 +156,7 @@ export class EntityComponent extends Component {
             else { // item being edited
                 switch (k.ftype) {
                     case 'entity':
-                        let search = {}
+                        let search = {};
                         if (k.search) search = k.search;
                         depItems = k.eclass.find(search, {sort: k.eclass.defaultSort}).fetch();
                         //console.log ("Processing display update! value is " + value);

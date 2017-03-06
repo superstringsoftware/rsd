@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Shows, ShowEntity } from '../api/shows.js';
 import { Dogs, DogEntity } from '../api/dogs.js';
 import { People, PersonEntity } from '../api/people.js';
+import {Results, ResultEntity} from '../api/results';
 
 import SimpleCollection from './SimpleCollection.jsx';
 
@@ -31,6 +32,16 @@ export const ShowsAdminTable = createContainer(() => {
     return {
         entity: ShowEntity,
         items: Shows.find({}, {sort: [ ["name", "asc"] ] }).fetch(),
+        depItems: {
+        },
+    };
+}, SimpleCollection);
+
+
+export const ResultsAdminTable = createContainer(() => {
+    return {
+        entity: ResultEntity,
+        items: Results.find({}, {sort: [ ["place", "asc"] ] }).fetch(),
         depItems: {
         },
     };
