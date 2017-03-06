@@ -156,7 +156,9 @@ export class EntityComponent extends Component {
             else { // item being edited
                 switch (k.ftype) {
                     case 'entity':
-                        depItems = k.eclass.find({}, {sort: k.eclass.defaultSort}).fetch();
+                        let search = {}
+                        if (k.search) search = k.search;
+                        depItems = k.eclass.find(search, {sort: k.eclass.defaultSort}).fetch();
                         //console.log ("Processing display update! value is " + value);
                         //debugger
                         //if (value) value = value.toHexString();

@@ -1,13 +1,10 @@
 import { Mongo } from 'meteor/mongo';
 
-export const Dogs = new Mongo.Collection('dogs', {idGeneration: 'MONGO'});
-
 import {Entity} from '../../lib/spaceSteroids/entity.js';
-
 import {PersonEntity} from './people.js';
-
 import {Auth} from '../../lib/spaceSteroids/users/auth.js';
 
+export const Dogs = new Mongo.Collection('dogs', {idGeneration: 'MONGO'});
 
 Dogs.allow({
   insert: function (userId, doc) {
@@ -34,8 +31,8 @@ DogEntity.setFields(
     {fname: "sex", ftype: "list", list: ["male", "female"]},
     {fname: "pedigree", ftype: "string"},
     {fname: "pedigreeNo", ftype: "string"},
-    {fname: "fatherID", ftype: "entity", eclass: DogEntity},
-    {fname: "motherID", ftype: "entity", eclass: DogEntity},
+    {fname: "fatherID", ftype: "entity", eclass: DogEntity, search: {sex: 'male'}},
+    {fname: "motherID", ftype: "entity", eclass: DogEntity, search: {sex: 'female'}},
     {fname: "link", ftype: "string"},
     {fname: "tattoo", ftype: "string"},
     {fname: "chip", ftype: "string"},

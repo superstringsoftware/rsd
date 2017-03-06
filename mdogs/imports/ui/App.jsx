@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Shows } from '../api/shows.js';
+import { Shows, ShowEntity } from '../api/shows.js';
 import { Dogs, DogEntity } from '../api/dogs.js';
 import { People, PersonEntity } from '../api/people.js';
 
 import SimpleCollection from './SimpleCollection.jsx';
 
-export var DogsAdminTable = createContainer(() => {
+export const DogsAdminTable = createContainer(() => {
   return {
     entity: DogEntity,
     items: Dogs.find({}, {sort: [ ["Name", "asc"], ["dob", "desc"] ] }).fetch(),
@@ -18,13 +18,22 @@ export var DogsAdminTable = createContainer(() => {
   };
 }, SimpleCollection);
 
-export var PeopleAdminTable = createContainer(() => {
+export const PeopleAdminTable = createContainer(() => {
   return {
     entity: PersonEntity,
     items: People.find({}, {sort: [ ["name", "asc"] ] }).fetch(),
     depItems: {
     },
   };
+}, SimpleCollection);
+
+export const ShowsAdminTable = createContainer(() => {
+    return {
+        entity: ShowEntity,
+        items: Shows.find({}, {sort: [ ["name", "asc"] ] }).fetch(),
+        depItems: {
+        },
+    };
 }, SimpleCollection);
 
 // App component - represents the whole app
