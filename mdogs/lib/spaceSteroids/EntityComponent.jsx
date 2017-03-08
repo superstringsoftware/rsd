@@ -99,8 +99,9 @@ export class EntityComponent extends Component {
         const name = target.name;
 
         //console.log(name + " = " + value + " is " + (typeof value));
-        id = new Mongo.ObjectID(value);
-        console.log(id);
+        let id = "null";
+        if (value !== "null") id = new Mongo.ObjectID(value);
+        //console.log(id);
 
         // not sure if this copying doesnot trigger update of all item fields???
         let upd = {item: this.state.item};
@@ -158,7 +159,8 @@ export class EntityComponent extends Component {
                     case 'entity':
                         let search = {};
                         if (k.search) search = k.search;
-                        depItems = k.eclass.find(search, {sort: k.eclass.defaultSort}).fetch();
+                        let depItems = k.eclass.find(search, {sort: k.eclass.defaultSort}).fetch();
+                        depItems.unshift({_id: "null"});
                         //console.log ("Processing display update! value is " + value);
                         //debugger
                         //if (value) value = value.toHexString();

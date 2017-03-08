@@ -15,7 +15,7 @@ export var PersonEntity = new Entity("People", People, [
 [ ["name", "asc"]]);
 
 PersonEntity.toShortString = function(ent) {
-    return ent.name;
+    return (ent.name ? ent.name : "[none]") ;
 }
 
 People.allow({

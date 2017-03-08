@@ -45,7 +45,7 @@ DogEntity.setFields(
 ]);
 
 DogEntity.toShortString = function(ent) {
-    return ent.Name;
+    return (ent.Name ? ent.Name : "[none]") ;
 }
 
 //export DogEntity;

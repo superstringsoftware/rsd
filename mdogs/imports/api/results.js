@@ -42,7 +42,7 @@ export var ResultEntity = new Entity("Results", Results,
     [ ["name", "asc"], ["date", "desc"] ]);
 
 ShowEntity.toShortString = function(ent) {
-    return ent.name;
+    return (ent.name ? ent.name : "[none]") ;
 };
 
 
