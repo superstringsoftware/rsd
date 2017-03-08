@@ -21,7 +21,7 @@ Dogs.allow({
   },
 });
 
-export var DogEntity = new Entity(Dogs, {}, [ ["Name", "asc"], ["dob", "desc"] ]);
+export var DogEntity = new Entity("Dogs", Dogs, {}, [ ["Name", "asc"], ["dob", "desc"] ]);
 DogEntity.setFields(
 [
     {fname: "Name", ftype: "string"},

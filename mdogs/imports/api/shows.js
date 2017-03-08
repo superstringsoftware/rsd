@@ -22,7 +22,7 @@ Shows.allow({
     },
 });
 
-export var ShowEntity = new Entity(Shows,
+export var ShowEntity = new Entity("Shows", Shows,
     [
         {fname: "name", ftype: "string"},
         {fname: "organizer", ftype: "string"},

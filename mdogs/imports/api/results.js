@@ -23,7 +23,7 @@ Results.allow({
     },
 });
 
-export var ResultEntity = new Entity(Results,
+export var ResultEntity = new Entity("Results", Results,
     [
         {fname: "dogID", ftype: "entity", eclass: DogEntity},
         {fname: "showID", ftype: "entity", eclass: ShowEntity},

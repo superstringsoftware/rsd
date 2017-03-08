@@ -65,7 +65,7 @@ export default class SimpleCollection extends Component {
         return (
             <div className="container">
                 <header>
-                    <h1>Todo List</h1>
+                    <h1>{ent.name}: {this.props.items.length}</h1>
                 </header>
 
                 <table className={this.state.tableClass}>

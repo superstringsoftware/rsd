@@ -5,7 +5,7 @@ import {Auth} from '../../lib/spaceSteroids/users/auth.js';
 
 export const People = new Mongo.Collection('people', {idGeneration: 'MONGO'});
 
-export var PersonEntity = new Entity(People, [
+export var PersonEntity = new Entity("People", People, [
     {fname: "name", ftype: "string"},
     {fname: "city", ftype: "string"},
     {fname: "country", ftype: "string"},

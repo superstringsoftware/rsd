@@ -1,6 +1,7 @@
 export class Entity {
 
-    constructor(collection, fields, defaultSort) {
+    constructor(name, collection, fields, defaultSort) {
+        this._name = name;
         this._fields = fields;
         this._collection = collection;
         this._defaultSort = defaultSort;
@@ -17,6 +18,10 @@ export class Entity {
 
     setFields(fields) {
         this._fields = fields;
+    }
+
+    get name() {
+        return this._name;
     }
 
     get defaultSort() {
