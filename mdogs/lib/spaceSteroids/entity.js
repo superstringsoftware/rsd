@@ -5,6 +5,7 @@ export class Entity {
         this._fields = fields;
         this._collection = collection;
         this._defaultSort = defaultSort;
+        this._fieldsOrder = null;
         /*
         fields should be an array of field names and field types - for type checking etc
         [{fname: '...', ftype: '...'}, ...] -- e.g.
@@ -20,6 +21,10 @@ export class Entity {
         this._fields = fields;
     }
 
+    setFieldsOrder(order) {
+        this._fieldsOrder = order;
+    }
+
     get name() {
         return this._name;
     }
@@ -30,6 +35,10 @@ export class Entity {
 
     get fields() {
         return this._fields;
+    }
+
+    get fieldsOrder() {
+        return this._fieldsOrder;
     }
 
     get fieldNames() {

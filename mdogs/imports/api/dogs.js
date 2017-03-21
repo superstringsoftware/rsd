@@ -21,28 +21,51 @@ Dogs.allow({
   },
 });
 
+const DogColsOrder = [
+    "Name",
+    "sex",
+    "color",
+    "dob",
+    "fatherID",
+    "motherID",
+    "pedigree",
+    "pedigreeNo",
+    "breederID",
+    "cobreederID",
+    "ownerID",
+    "coOwnerID",
+    "tattoo",
+    "chip",
+    "link"
+];
+
 export var DogEntity = new Entity("Dogs", Dogs, {}, [ ["Name", "asc"], ["dob", "desc"] ]);
 DogEntity.setFields(
 [
     {fname: "Name", ftype: "string"},
+    {fname: "sex", ftype: "list", list: ["male", "female"]},
+    {fname: "color", ftype: "list", list: ["black", "liver", "yellow"]},
+    {fname: "dob", ftype: "date"},
+    {fname: "fatherID", ftype: "entity", eclass: DogEntity, search: {sex: 'male'}},
+    {fname: "motherID", ftype: "entity", eclass: DogEntity, search: {sex: 'female'}},
+    {fname: "pedigree", ftype: "string"},
+    {fname: "pedigreeNo", ftype: "string"},
+    {fname: "breederID", ftype: "entity", eclass: PersonEntity},
+    {fname: "cobreederID", ftype: "entity", eclass: PersonEntity},
     //{fname: "ID", ftype: "number"},
     {fname: "ownerID", ftype: "entity", eclass: PersonEntity},
     {fname: "coOwnerID", ftype: "entity", eclass: PersonEntity},
-    {fname: "sex", ftype: "list", list: ["male", "female"]},
-    {fname: "pedigree", ftype: "string"},
-    {fname: "pedigreeNo", ftype: "string"},
-    {fname: "fatherID", ftype: "entity", eclass: DogEntity, search: {sex: 'male'}},
-    {fname: "motherID", ftype: "entity", eclass: DogEntity, search: {sex: 'female'}},
-    {fname: "link", ftype: "string"},
     {fname: "tattoo", ftype: "string"},
     {fname: "chip", ftype: "string"},
+    {fname: "link", ftype: "string"},
 
-    {fname: "dob", ftype: "date"},
 
-    {fname: "breederID", ftype: "entity", eclass: PersonEntity},
-    {fname: "cobreederID", ftype: "entity", eclass: PersonEntity},
-    {fname: "color", ftype: "list", list: ["black", "liver", "yellow"]},
+
+
+
 ]);
+
+//DogEntity.setFieldsOrder(DogColsOrder);
 
 DogEntity.toShortString = function(ent) {
     return (ent.Name ? ent.Name : "[none]") ;

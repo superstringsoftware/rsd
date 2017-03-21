@@ -10,9 +10,17 @@ class LineHeader extends Component {
 
     render() {
         let cells = [];
-        this.props.entity.fieldNames.forEach( function (k, index) {
-            cells.push (<th key={index}>{k}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>);
-        });
+        if (this.props.entity.fieldsOrder !== null) {
+            //console.log ("trying ordered thing");
+            this.props.entity.fieldsOrder.forEach( function(k, index) {
+                //let field =
+                cells.push (<th key={index}>{k}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>);
+            }, this);
+        } else {
+            this.props.entity.fieldNames.forEach( function (k, index) {
+                cells.push (<th key={index}>{k}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>);
+            });
+        }
 
         /*
         if (this.props.item !== undefined) {

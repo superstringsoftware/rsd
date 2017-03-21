@@ -130,18 +130,20 @@ export class EntityComponent extends Component {
 
     render() {
         let cells = [];
+        let preCells = [];
         let item = this.state.item;
         let isEdited = this.state.isEdited;
         let isNew = this.state.isNew;
 
-        if (isEdited === false) cells.push(<td key="buttons"><button type="button" className="btn btn-danger btn-xs" onClick={this.handleDelete}>del</button></td>);
-        else cells.push(
+        if (isEdited === false) preCells.push(<td key="buttons"><button type="button" className="btn btn-danger btn-xs" onClick={this.handleDelete}>del</button></td>);
+        else preCells.push(
             <td key="buttons">
                 <button type="button" className="btn btn-warning btn-xs" onClick={this.handleEsc}>esc</button>
                 <button type="button" className="btn btn-success btn-xs" onClick={this.handleSave}>save</button>
             </td>);
 
         this.props.entity.fields.forEach( function (k, index) {
+            //console.log(index + " = " + k);
             const value = item[k.fname];
             if (isEdited === false) {
                 if (k.ftype === 'entity') {
@@ -191,9 +193,18 @@ export class EntityComponent extends Component {
         },
         this);
 
+        let sortedCells = cells;
+        if (this.props.entity.fieldsOrder !== null) {
+            //console.log ("trying ordered thing");
+            this.props.entity.fieldsOrder.forEach( function(k, index) {
+                //let field =
+                
+            }, this);
+        }
+
         return (
             <tr className="showLine" onDoubleClick={this.handleDoubleClick} onKeyUp={this.handleKeyPress}>
-                {cells}
+                {preCells}{cells}
             </tr>
         );
 }
