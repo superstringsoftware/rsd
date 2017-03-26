@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
 
-import {PeopleAdminTable, DogsAdminTable, ShowsAdminTable, ResultsAdminTable} from './App.jsx';
+import {PeopleAdminTable, DogsAdminTable, ShowsAdminTable, ResultsAdminTable, ShowsSelection} from './App.jsx';
+import { ResultsShows } from './ResultsShows.jsx';
 
 export default class AdminMenu extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export default class AdminMenu extends Component {
     }
 
     showResults(event) {
-        render(<ResultsAdminTable />, document.getElementById('render-target'));
+        render(<ShowsSelection />, document.getElementById('render-target'));
     }
 
     render() {

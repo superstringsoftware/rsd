@@ -9,17 +9,19 @@ class LineHeader extends Component {
     }
 
     render() {
+      //if (this.props.entity) return null;
         let cells = [];
-        if (this.props.entity.fieldsOrder !== null) {
+        if ( (this.props.entity.fieldsOrder !== null) && (this.props.entity.fieldsOrder !== undefined)) {
             //console.log ("trying ordered thing");
             this.props.entity.fieldsOrder.forEach( function(k, index) {
                 //let field =
                 cells.push (<th key={index}>{k}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>);
             }, this);
         } else {
-            this.props.entity.fieldNames.forEach( function (k, index) {
-                cells.push (<th key={index}>{k}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>);
-            });
+            if ( (this.props.entity.fieldNames !== null) && (this.props.entity.fieldNames !== undefined))
+              this.props.entity.fieldNames.forEach( function (k, index) {
+                  cells.push (<th key={index}>{k}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>);
+              });
         }
 
         /*
@@ -61,8 +63,9 @@ export default class SimpleCollection extends Component {
         //console.log(this.props);
         const ent = this.props.entity;
         const depItems = this.props.depItems;
+        const emptyItem = this.props.emptyItem;
         return this.props.items.map((item) => (
-            <EntityComponent key={item._id} item={item} entity={ent} depItems={depItems} />
+            <EntityComponent key={item._id} item={item} entity={ent} depItems={depItems} emptyItem={emptyItem} />
         ));
     }
 
@@ -70,8 +73,10 @@ export default class SimpleCollection extends Component {
         const hitem = this.props.items[0];
         if (hitem === undefined) return null;
         const ent = this.props.entity;
+        const emptyItem = this.props.emptyItem;
         return (
-            <div className="container">
+            <div className="row">
+              <div className="col-md-12">
                 <header>
                     <h1>{ent.name}: {this.props.items.length}</h1>
                 </header>
@@ -81,11 +86,11 @@ export default class SimpleCollection extends Component {
                         <LineHeader item={hitem} entity={ent} />
                     </thead>
                     <tbody>
-                        <EntityComponent key="newItem" entity={ent} isEdited={true} isNew={true} />
+                        <EntityComponent key="newItem" entity={ent} isEdited={true} isNew={true} emptyItem={emptyItem} />
                         {this.renderItems()}
                     </tbody>
                 </table>
-
+              </div>
             </div>
         );
     }

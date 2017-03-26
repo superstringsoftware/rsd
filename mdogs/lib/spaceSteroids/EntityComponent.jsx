@@ -17,7 +17,12 @@ export class EntityComponent extends Component {
         super(props);
         let isEdited = false;
         let isNew = false;
+
+        //console.log(props.emptyItem);
+
         let item = props.entity.createEmptyItem();
+
+        if (props.emptyItem !== undefined) item = props.emptyItem;
         if (props.isEdited !== undefined) isEdited = props.isEdited;
         if (props.isNew !== undefined) isNew = props.isNew;
         if (isNew === false) item = props.item;
@@ -34,6 +39,18 @@ export class EntityComponent extends Component {
         this.handleDelete = this.handleDelete.bind(this);
         this.handleEsc = this.handleEsc.bind(this);
         this.handleSave = this.handleSave.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+      //console.log(nextProps);
+      if (nextProps.emptyItem !== undefined)
+        {
+          //console.log("Got new item:");
+          //console.log(nextProps.emptyItem.showID);
+          let item = this.state.item;
+          item.showID = nextProps.emptyItem.showID;
+          this.setState ({item: item});
+        }
     }
 
     handleEsc(event) {
@@ -135,6 +152,8 @@ export class EntityComponent extends Component {
         let isEdited = this.state.isEdited;
         let isNew = this.state.isNew;
 
+        //console.log(this.state);
+
         if (isEdited === false) preCells.push(<td key="buttons"><button type="button" className="btn btn-danger btn-xs" onClick={this.handleDelete}>del</button></td>);
         else preCells.push(
             <td key="buttons">
@@ -163,7 +182,8 @@ export class EntityComponent extends Component {
                         if (k.search) search = k.search;
                         let depItems = k.eclass.find(search, {sort: k.eclass.defaultSort}).fetch();
                         depItems.unshift({_id: "null"});
-                        //console.log ("Processing display update! value is " + value + " " + (typeof value));
+                        //console.log ("Processing display update! value is " + value + " " + k.fname);
+                        //console.log(this.props);
                         //debugger
                         //if (value) value = value.toHexString();
                         cells.push (

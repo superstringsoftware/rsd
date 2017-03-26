@@ -52,6 +52,8 @@ ResultEntity.createEmptyItem = function() {
     let item = {};
     this.fieldNames.forEach( (k)=>item[k]='' );
     item["showID"] = this.currentShowID;
+    //console.log("New Item created:");
+    //console.log(item);
     return item;
 }
 
