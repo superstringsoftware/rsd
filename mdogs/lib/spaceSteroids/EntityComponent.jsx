@@ -144,7 +144,7 @@ export class EntityComponent extends Component {
 
         this.props.entity.fields.forEach( function (k, index) {
             //console.log(index + " = " + k);
-            const value = item[k.fname];
+            let value = item[k.fname];
             if (isEdited === false) {
                 if (k.ftype === 'entity') {
                     //console.log(k);
@@ -163,7 +163,7 @@ export class EntityComponent extends Component {
                         if (k.search) search = k.search;
                         let depItems = k.eclass.find(search, {sort: k.eclass.defaultSort}).fetch();
                         depItems.unshift({_id: "null"});
-                        //console.log ("Processing display update! value is " + value);
+                        //console.log ("Processing display update! value is " + value + " " + (typeof value));
                         //debugger
                         //if (value) value = value.toHexString();
                         cells.push (
@@ -198,7 +198,7 @@ export class EntityComponent extends Component {
             //console.log ("trying ordered thing");
             this.props.entity.fieldsOrder.forEach( function(k, index) {
                 //let field =
-                
+
             }, this);
         }
 

@@ -41,8 +41,20 @@ export var ResultEntity = new Entity("Results", Results,
     ],
     [ ["name", "asc"], ["date", "desc"] ]);
 
-ShowEntity.toShortString = function(ent) {
+ResultEntity.toShortString = function(ent) {
     return (ent.name ? ent.name : "[none]") ;
 };
 
+// using this to pre-select show which we are editing (UGLY)
+ResultEntity.currentShowID = null;
 
+ResultEntity.createEmptyItem = function() {
+    let item = {};
+    this.fieldNames.forEach( (k)=>item[k]='' );
+    item["showID"] = this.currentShowID;
+    return item;
+}
+
+
+//export var ResultWithShowEntity = new ResultEntity();
+//export ResultWithShowEntity;

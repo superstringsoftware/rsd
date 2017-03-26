@@ -71,4 +71,12 @@ DogEntity.toShortString = function(ent) {
     return (ent.Name ? ent.Name : "[none]") ;
 }
 
+DogEntity.createEmptyItem = function() {
+    let item = {};
+    this.fieldNames.forEach( (k)=>item[k]='' );
+    item["color"] = "black";
+    item["sex"] = "male";
+    return item;
+}
+
 //export DogEntity;

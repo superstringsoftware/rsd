@@ -1,0 +1,59 @@
+
+
+<template name="applicationLayout">
+    <!-- main application template with Blaze Templates -->
+
+    <!-- top menu / navigation -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">RSD</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+
+            <li>
+               <a href="/shows">Shows</a>
+            </li>
+            <li>
+              <a href="#">Dogs</a>
+            </li>
+            <li>
+              <a href="#">People</a>
+            </li>
+
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">{{> loginButtons}}</a></li>
+
+          </ul>
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- main area -->
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8 col-md-offset-2">
+                {{> Template.dynamic template=main}}
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; J "X-Ray" Ho, 2017</p>
+      </div>
+    </footer>
+</template>
