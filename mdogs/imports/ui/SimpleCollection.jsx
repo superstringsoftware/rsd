@@ -71,7 +71,7 @@ export default class SimpleCollection extends Component {
 
     render() {
         const hitem = this.props.items[0];
-        if (hitem === undefined) return null;
+        //if (hitem === undefined) return null;
         const ent = this.props.entity;
         const emptyItem = this.props.emptyItem;
         return (
