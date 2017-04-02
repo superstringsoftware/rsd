@@ -44,7 +44,7 @@ DogEntity.setFields(
 [
     {fname: "Name", ftype: "string"},
     {fname: "sex", ftype: "list", list: ["male", "female"]},
-    {fname: "color", ftype: "list", list: ["black", "liver", "yellow"]},
+    {fname: "color", ftype: "list", list: ["--?--", "black", "liver", "yellow"]},
     {fname: "dob", ftype: "date"},
     {fname: "fatherID", ftype: "entity", eclass: DogEntity, search: {sex: 'male'}},
     {fname: "motherID", ftype: "entity", eclass: DogEntity, search: {sex: 'female'}},
@@ -74,7 +74,7 @@ DogEntity.toShortString = function(ent) {
 DogEntity.createEmptyItem = function() {
     let item = {};
     this.fieldNames.forEach( (k)=>item[k]='' );
-    item["color"] = "black";
+    item["color"] = "--?--";
     item["sex"] = "male";
     return item;
 }
