@@ -36,7 +36,9 @@ const DogColsOrder = [
     "coOwnerID",
     "tattoo",
     "chip",
-    "link"
+    "link",
+    "dod",
+    "deathReason"
 ];
 
 export var DogEntity = new Entity("Dogs", Dogs, {}, [ ["Name", "asc"], ["dob", "desc"] ]);
@@ -58,6 +60,8 @@ DogEntity.setFields(
     {fname: "tattoo", ftype: "string"},
     {fname: "chip", ftype: "string"},
     {fname: "link", ftype: "string"},
+    {fname: "dod", ftype: "date"},
+    {fname: "deathReason", ftype: "string"}
 
 
 
