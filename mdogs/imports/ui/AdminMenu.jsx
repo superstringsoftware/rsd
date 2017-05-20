@@ -4,9 +4,15 @@ import { render } from 'react-dom';
 import {PeopleAdminTable, DogsAdminTable, ShowsAdminTable, ResultsAdminTable, ShowsSelection} from './App.jsx';
 import { ResultsShows } from './ResultsShows.jsx';
 
+import {ShowsPublicTable, ShowsPublicTableView} from './public/showsPage.jsx';
+
 export default class AdminMenu extends Component {
     constructor(props) {
         super(props);
+    }
+
+    showPublicShows(event) {
+        render(<ShowsPublicTable />, document.getElementById('render-target'));
     }
 
     showPeople(event) {
@@ -29,6 +35,9 @@ export default class AdminMenu extends Component {
 
         return (
             <ul className="nav navbar-nav">
+              <li>
+                <a href="#" onClick={this.showPublicShows}>Public Shows</a>
+              </li>
               <li>
                 <a href="#" onClick={this.showDogs}>Dogs</a>
               </li>
