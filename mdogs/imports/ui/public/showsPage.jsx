@@ -25,8 +25,10 @@ class ShowLineComponent extends Component {
     return (
       <tr onClick={this.handleClick}>
         <td>{this.props.item.date}</td>
+        <td>{this.props.item.rank}</td>
         <td>{this.props.item.name}</td>
-        <td>{this.props.item.place}</td>
+        <td>{this.props.item.organizer}</td>
+
       </tr>
     );
   }
@@ -56,8 +58,9 @@ export class ShowsPublicTableView extends Component {
                 <thead>
                   <tr>
                     <th>Дата</th>
+                    <th>Ранг</th>
                     <th>Название</th>
-                    <th>Место</th>
+                    <th>Организатор</th>
                   </tr>
                 </thead>
                 <tbody>

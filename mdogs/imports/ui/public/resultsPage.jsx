@@ -29,6 +29,13 @@ class ResultLineComponent extends Component {
           <td>{this.props.item.class}</td>
           <td>{this.props.item.mark}</td>
           <td>{this.props.item.place}</td>
+          <td>{this.props.item.certificate}</td>
+          <td>
+            {this.props.item.ageResult}<br/>
+            {this.props.item.breedResult}<br/>
+            {this.props.item.groupResult}<br/>
+            {this.props.item.bisResult}
+          </td>
         </tr>
       );
     else return(<tr></tr>);
@@ -62,6 +69,8 @@ export class ResultsPublicTableView extends Component {
                     <th>Класс</th>
                     <th>Оценка</th>
                     <th>Место</th>
+                    <th>Сертификат</th>
+                    <th>Итоговый результат</th>
                   </tr>
                 </thead>
                 <tbody>
