@@ -59,7 +59,7 @@ class AdminMenu extends Component {
           </ul>
         }
         else ret = <ul className="nav navbar-nav"><li>
-          <a href="#" onClick={this.showPublicShows}></a>
+          <a href="#" onClick={this.showPublicShows}>Результаты выставок</a>
         </li></ul>
 
         return ret;

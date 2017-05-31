@@ -71,7 +71,7 @@ export class ResultsPublicTableView extends Component {
                     {this.renderItems()}
                 </tbody>
             </table>
-          
+
     );
   }
 }
@@ -79,13 +79,15 @@ export class ResultsPublicTableView extends Component {
 // Ok, we have to build a pretty complex thing here because need to sort results
 // first by sex, then by class
 export const ResultsPublicTable = createContainer(({ id, sex }) => {
-    const results = Results.find({showID: id}, {sort: [ ["class", "asc"] ] }).fetch();
+    const results = Results.find({showID: id}, {sort: [ ["class", "asc"], ["place", "asc"] ] }).fetch();
     var boys = [];
     results.forEach( function (res, index) {
       var dog = Dogs.findOne(res.dogID);
       //console.log(dog);
-      res.dogName = dog.Name;
-      if (dog.sex == sex) boys.push(res);
+      if (dog != undefined) {
+        res.dogName = dog.Name;
+        if (dog.sex == sex) boys.push(res);
+      }
     });
 
     return {
