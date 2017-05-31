@@ -18,7 +18,7 @@ class ShowLineComponent extends Component {
     id = this.props.item._id;
 
     //console.log(id);
-    render(<ResultsPublicTable id={id} />, document.getElementById('render-target'));
+    render(<TotalResultsTable id={id} />, document.getElementById('render-target'));
   }
 
   render() {
@@ -31,6 +31,37 @@ class ShowLineComponent extends Component {
 
       </tr>
     );
+  }
+}
+
+class TotalResultsTable extends Component {
+  constructor(props) {
+      super(props);
+      //console.log(props);
+  }
+
+  render() {
+    return (
+      <div>
+      <div className="row">
+        <div className="col-md-12">
+          <header>
+              <h4>Кобели</h4>
+          </header>
+          <ResultsPublicTable id={this.props.id} sex='male' />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <header>
+              <h4>Суки</h4>
+          </header>
+          <ResultsPublicTable id={this.props.id} sex='female' />
+        </div>
+      </div>
+    </div>
+
+    )
   }
 }
 
@@ -51,7 +82,8 @@ export class ShowsPublicTableView extends Component {
         <div className="row">
           <div className="col-md-12">
             <header>
-                <h1>Список выставок с результатами</h1>
+                <h3>Список выставок с результатами</h3>
+                <p>кликните на выставке для просмотра результатов</p>
             </header>
 
             <table className="table table-striped table-hover">

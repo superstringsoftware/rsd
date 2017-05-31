@@ -25,7 +25,7 @@ class ResultLineComponent extends Component {
       return (
 
         <tr onClick={this.handleClick}>
-          <td>{dog.Name}</td>
+          <td>{this.props.item.dogName}</td>
           <td>{this.props.item.class}</td>
           <td>{this.props.item.mark}</td>
           <td>{this.props.item.place}</td>
@@ -56,12 +56,6 @@ export class ResultsPublicTableView extends Component {
 
   render() {
     return (
-        <div className="row">
-          <div className="col-md-12">
-            <header>
-                <h1>Список результатов</h1>
-            </header>
-
             <table className="table table-striped table-hover">
                 <thead>
                   <tr>
@@ -77,16 +71,25 @@ export class ResultsPublicTableView extends Component {
                     {this.renderItems()}
                 </tbody>
             </table>
-          </div>
-        </div>
+          
     );
   }
 }
 
+// Ok, we have to build a pretty complex thing here because need to sort results
+// first by sex, then by class
+export const ResultsPublicTable = createContainer(({ id, sex }) => {
+    const results = Results.find({showID: id}, {sort: [ ["class", "asc"] ] }).fetch();
+    var boys = [];
+    results.forEach( function (res, index) {
+      var dog = Dogs.findOne(res.dogID);
+      //console.log(dog);
+      res.dogName = dog.Name;
+      if (dog.sex == sex) boys.push(res);
+    });
 
-export const ResultsPublicTable = createContainer(({ id }) => {
     return {
-        results: Results.find({showID: id}).fetch(),
+        results: boys,
 
     };
 }, ResultsPublicTableView);

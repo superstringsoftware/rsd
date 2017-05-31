@@ -5,9 +5,12 @@ import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 
 import { DogsAdminTable, PeopleAdminTable } from '../imports/ui/App.jsx';
-import AdminMenu from '../imports/ui/AdminMenu.jsx';
+import { AdminMenu, AdminMenuComponent } from '../imports/ui/AdminMenu.jsx';
+import {ShowsPublicTable} from '../imports/ui/public/showsPage.jsx';
 
 Meteor.startup(() => {
-  render(<PeopleAdminTable />, document.getElementById('render-target'));
-  render(<AdminMenu />, document.getElementById('admin-menu'));
+  render(<ShowsPublicTable />, document.getElementById('render-target'));
+  render(<AdminMenuComponent />, document.getElementById('admin-menu'));
+
+  //Meteor.subscribe('userData');
 });
