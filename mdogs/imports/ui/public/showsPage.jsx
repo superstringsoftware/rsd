@@ -113,6 +113,8 @@ export class ShowsPublicTableView extends Component {
 
 export const ShowsPublicTable = createContainer(() => {
     return {
+
+      // ugly hack for sorting by date with a string representation
         shows: (Shows.find({}).fetch()).sort( function(a,b) {
             if (simpleStringToDate(a.date) > simpleStringToDate(b.date)) return -1;
             else if (simpleStringToDate(a.date) < simpleStringToDate(b.date)) return 1;
@@ -122,6 +124,7 @@ export const ShowsPublicTable = createContainer(() => {
     };
 }, ShowsPublicTableView);
 
+// ugly hack for sorting by date with a string representation
 function simpleStringToDate(str) {
   x = str.split(".");
   d = new Date(parseInt(x[2]), parseInt(x[1]) - 1, parseInt(x[0]));

@@ -21,7 +21,12 @@ class ResultLineComponent extends Component {
     //console.log(this.props.item);
     //console.log(dogID);
     const dog = Dogs.findOne(dogID);
-    if (dog != undefined)
+    if (dog != undefined) {
+      result = "";
+      if (this.props.item.ageResult != "--?--") result += this.props.item.ageResult;
+      if ( (this.props.item.breedResult != "--?--") ) result += "  " + this.props.item.breedResult;
+      if ( (this.props.item.groupResult != "--?--") ) result += "  " + this.props.item.groupResult;
+      if ( (this.props.item.bisResult != "--?--") ) result += "  " + this.props.item.bisResult;
       return (
 
         <tr onClick={this.handleClick}>
@@ -31,13 +36,10 @@ class ResultLineComponent extends Component {
           <td>{this.props.item.place}</td>
           <td>{this.props.item.certificate}</td>
           <td>
-            {this.props.item.ageResult}<br/>
-            {this.props.item.breedResult}<br/>
-            {this.props.item.groupResult}<br/>
-            {this.props.item.bisResult}
+            {result}
           </td>
         </tr>
-      );
+      ); }
     else return(<tr></tr>);
   }
 }
