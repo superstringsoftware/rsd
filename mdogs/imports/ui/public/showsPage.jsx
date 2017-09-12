@@ -113,7 +113,18 @@ export class ShowsPublicTableView extends Component {
 
 export const ShowsPublicTable = createContainer(() => {
     return {
-        shows: Shows.find({}, {sort: [ ["name", "asc"] ] }).fetch(),
+        shows: (Shows.find({}).fetch()).sort( function(a,b) {
+            if (simpleStringToDate(a.date) > simpleStringToDate(b.date)) return -1;
+            else if (simpleStringToDate(a.date) < simpleStringToDate(b.date)) return 1;
+                 else return 0;
+        })
 
     };
 }, ShowsPublicTableView);
+
+function simpleStringToDate(str) {
+  x = str.split(".");
+  d = new Date(parseInt(x[2]), parseInt(x[1]) - 1, parseInt(x[0]));
+  // console.log(str, " = ", d);
+  return d;
+}
