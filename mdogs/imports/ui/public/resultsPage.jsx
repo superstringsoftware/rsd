@@ -22,6 +22,13 @@ class ResultLineComponent extends Component {
     //console.log(dogID);
     const dog = Dogs.findOne(dogID);
     if (dog != undefined) {
+      mark = "";
+      if (this.props.item.mark != "--?--") mark = this.props.item.mark;
+      place = "";
+      if (this.props.item.place != "--?--") place = this.props.item.place;
+      certificate = "";
+      if (this.props.item.certificate != "--?--") certificate = this.props.item.certificate;
+      // results ugly hack
       result = "";
       if (this.props.item.ageResult != "--?--") result += this.props.item.ageResult;
       if ( (this.props.item.breedResult != "--?--") && (this.props.item.breedResult.length > 0) )
@@ -39,9 +46,9 @@ class ResultLineComponent extends Component {
         <tr onClick={this.handleClick}>
           <td>{this.props.item.dogName}</td>
           <td>{this.props.item.class}</td>
-          <td>{this.props.item.mark}</td>
-          <td>{this.props.item.place}</td>
-          <td>{this.props.item.certificate}</td>
+          <td>{mark}</td>
+          <td>{place}</td>
+          <td>{certificate}</td>
           <td>
             {result}
           </td>
