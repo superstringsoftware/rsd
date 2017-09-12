@@ -40,11 +40,16 @@ class TotalResultsTable extends Component {
       //console.log(props);
   }
 
+  showPublicShows(event) {
+      render(<ShowsPublicTable />, document.getElementById('render-target'));
+  }
+
   render() {
     return (
       <div>
       <div className="row">
         <div className="col-md-12">
+          <a href="#" onClick={this.showPublicShows}>Назад к списку выставок</a>
           <header>
               <h4>Кобели</h4>
           </header>
