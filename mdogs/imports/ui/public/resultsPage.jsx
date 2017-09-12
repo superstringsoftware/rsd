@@ -24,9 +24,16 @@ class ResultLineComponent extends Component {
     if (dog != undefined) {
       result = "";
       if (this.props.item.ageResult != "--?--") result += this.props.item.ageResult;
-      if ( (this.props.item.breedResult != "--?--") ) result += "  " + this.props.item.breedResult;
-      if ( (this.props.item.groupResult != "--?--") ) result += "  " + this.props.item.groupResult;
-      if ( (this.props.item.bisResult != "--?--") ) result += "  " + this.props.item.bisResult;
+      if ( (this.props.item.breedResult != "--?--") && (this.props.item.breedResult.length > 0) )
+        if (result.length > 0) result += ", " + this.props.item.breedResult;
+        else result += this.props.item.breedResult;
+      if ( (this.props.item.groupResult != "--?--") && (this.props.item.groupResult.length > 0) )
+        if (result.length > 0) result += ", " + this.props.item.groupResult;
+        else result += this.props.item.groupResult;
+      if ( (this.props.item.bisResult != "--?--") && (this.props.item.bisResult.length > 0) )
+        if (result.length > 0) result += ", " + this.props.item.bisResult;
+        else result += this.props.item.bisResult;
+
       return (
 
         <tr onClick={this.handleClick}>
