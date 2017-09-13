@@ -33,7 +33,11 @@ export const PeopleAdminTable = createContainer(() => {
 export const ShowsAdminTable = createContainer(() => {
     return {
         entity: ShowEntity,
-        items: Shows.find({}, {sort: [ ["name", "asc"] ] }).fetch(),
+        items: (Shows.find({}).fetch()).sort( function(a,b) {
+            if (simpleStringToDate(a.date) > simpleStringToDate(b.date)) return -1;
+            else if (simpleStringToDate(a.date) < simpleStringToDate(b.date)) return 1;
+                 else return 0;
+        }),
         depItems: {
         },
     };
@@ -59,3 +63,11 @@ export const ShowsSelection = createContainer(() => {
 
 // App component - represents the whole app
 // class App extends Component
+
+// ugly hack for sorting by date with a string representation
+function simpleStringToDate(str) {
+  x = str.split(".");
+  d = new Date(parseInt(x[2]), parseInt(x[1]) - 1, parseInt(x[0]));
+  // console.log(str, " = ", d);
+  return d;
+}
