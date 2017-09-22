@@ -1,5 +1,6 @@
 import { Results } from '../../api/results.js';
 import { Dogs } from '../../api/dogs.js';
+import { Shows } from '../../api/shows.js';
 
 import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
@@ -108,6 +109,7 @@ export const ResultsPublicTable = createContainer(({ id, sex }) => {
 
     return {
         results: boys,
+        show: Shows.findOne(id)
 
     };
 }, ResultsPublicTableView);

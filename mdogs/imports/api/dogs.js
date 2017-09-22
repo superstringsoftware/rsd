@@ -30,6 +30,8 @@ const DogColsOrder = [
     "motherID",
     "pedigree",
     "pedigreeNo",
+    "birthCountry",
+    "currentCountry",
     "breederID",
     "cobreederID",
     "ownerID",
@@ -52,6 +54,10 @@ DogEntity.setFields(
     {fname: "motherID", ftype: "entity", eclass: DogEntity, search: {sex: 'female'}},
     {fname: "pedigree", ftype: "string"},
     {fname: "pedigreeNo", ftype: "string"},
+    {fname: "birthCountry", ftype: "list", list: ["--?--", "Russia", "Belorussia", "Ukraine", "Kazakhstan", "Estonia", "Litva", "Latvia", "Finland",
+              "Sweden", "Netherlands", "Germany", "Czech Republic", "Poland"]},
+    {fname: "currentCountry", ftype: "list", list: ["--?--", "Russia", "Belorussia", "Ukraine", "Kazakhstan", "Estonia", "Litva", "Latvia", "Finland",
+              "Sweden", "Netherlands", "Germany", "Czech Republic", "Poland"]},
     {fname: "breederID", ftype: "entity", eclass: PersonEntity},
     {fname: "cobreederID", ftype: "entity", eclass: PersonEntity},
     //{fname: "ID", ftype: "number"},
@@ -79,6 +85,8 @@ DogEntity.createEmptyItem = function() {
     let item = {};
     this.fieldNames.forEach( (k)=>item[k]='' );
     item["color"] = "--?--";
+    item["birthCountry"] = "--?--";
+    item["currentCountry"] = "--?--";
     item["sex"] = "male";
     return item;
 }

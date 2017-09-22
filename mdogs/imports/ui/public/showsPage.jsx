@@ -18,7 +18,7 @@ class ShowLineComponent extends Component {
     id = this.props.item._id;
 
     //console.log(id);
-    render(<TotalResultsTable id={id} />, document.getElementById('render-target'));
+    render(<TotalResultsTable id={id} show={this.props.item} />, document.getElementById('render-target'));
   }
 
   render() {
@@ -37,7 +37,7 @@ class ShowLineComponent extends Component {
 class TotalResultsTable extends Component {
   constructor(props) {
       super(props);
-      //console.log(props);
+      console.log(props);
   }
 
   showPublicShows(event) {
