@@ -2,7 +2,7 @@ import { Shows } from '../../api/shows.js';
 
 import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 
 import {ResultsPublicTable} from './resultsPage.jsx';
 
@@ -37,7 +37,7 @@ class ShowLineComponent extends Component {
 class TotalResultsTable extends Component {
   constructor(props) {
       super(props);
-      console.log(props);
+      //console.log(props);
   }
 
   showPublicShows(event) {
@@ -111,18 +111,23 @@ export class ShowsPublicTableView extends Component {
 }
 
 
-export const ShowsPublicTable = createContainer(() => {
-    return {
+export const ShowsPublicTable = withTracker(() => {
+  const showsHandle = Meteor.subscribe('shows.all');
+  const loading = !showsHandle.ready();
 
-      // ugly hack for sorting by date with a string representation
-        shows: (Shows.find({}).fetch()).sort( function(a,b) {
-            if (simpleStringToDate(a.date) > simpleStringToDate(b.date)) return -1;
-            else if (simpleStringToDate(a.date) < simpleStringToDate(b.date)) return 1;
-                 else return 0;
-        })
+
+  return {
+      loading,
+
+    // ugly hack for sorting by date with a string representation
+      shows: (!loading) ? (Shows.find({}).fetch()).sort( function(a,b) {
+          if (simpleStringToDate(a.date) > simpleStringToDate(b.date)) return -1;
+          else if (simpleStringToDate(a.date) < simpleStringToDate(b.date)) return 1;
+               else return 0;
+      }) : []
 
     };
-}, ShowsPublicTableView);
+}) (ShowsPublicTableView);
 
 // ugly hack for sorting by date with a string representation
 function simpleStringToDate(str) {

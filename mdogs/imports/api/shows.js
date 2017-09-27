@@ -6,7 +6,6 @@ import {Entity} from '../../lib/spaceSteroids/entity.js';
 import {PersonEntity} from './people.js';
 import {Auth} from '../../lib/spaceSteroids/users/auth.js';
 
-
 Shows.allow({
     insert: function (userId, doc) {
         // the user must be logged in, and the document must be owned by the user
@@ -42,4 +41,3 @@ export var ShowEntity = new Entity("Shows", Shows,
 ShowEntity.toShortString = function(ent) {
     return (ent.name ? ent.name : "[none]") ;
 }
-
