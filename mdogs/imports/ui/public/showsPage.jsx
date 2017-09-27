@@ -14,6 +14,7 @@ class ShowLineComponent extends Component {
   }
 
   handleClick() {
+
     //id = new Mongo.ObjectID(this.props.item._id);
     id = this.props.item._id;
 
@@ -23,10 +24,10 @@ class ShowLineComponent extends Component {
 
   render() {
     return (
-      <tr onClick={this.handleClick}>
+      <tr>
         <td>{this.props.item.date}</td>
         <td>{this.props.item.rank}</td>
-        <td>{this.props.item.name}</td>
+        <td><a href={'/shows/' + this.props.item._id}>{this.props.item.name}</a></td>
         <td>{this.props.item.organizer}</td>
 
       </tr>
@@ -34,14 +35,10 @@ class ShowLineComponent extends Component {
   }
 }
 
-class TotalResultsTable extends Component {
+export class TotalResultsTable extends Component {
   constructor(props) {
       super(props);
       //console.log(props);
-  }
-
-  showPublicShows(event) {
-      render(<ShowsPublicTable />, document.getElementById('render-target'));
   }
 
   render() {
@@ -49,11 +46,11 @@ class TotalResultsTable extends Component {
       <div>
       <div className="row">
         <div className="col-md-12">
-          <a href="#" onClick={this.showPublicShows}>Назад к списку выставок</a>
+          {/*<a href="/">Назад к списку выставок</a>*/}
           <header>
               <h4>Кобели</h4>
           </header>
-          <ResultsPublicTable id={this.props.id} sex='male' />
+          <ResultsPublicTable id={this.props.match.params.id} sex='male' />
         </div>
       </div>
       <div className="row">
@@ -61,7 +58,7 @@ class TotalResultsTable extends Component {
           <header>
               <h4>Суки</h4>
           </header>
-          <ResultsPublicTable id={this.props.id} sex='female' />
+          <ResultsPublicTable id={this.props.match.params.id} sex='female' />
         </div>
       </div>
     </div>

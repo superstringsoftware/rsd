@@ -41,7 +41,7 @@ class AdminMenu extends Component {
         if ( (user != undefined) && (user.securityProfile != undefined) && (user.securityProfile.primaryRole === 'administrator')  ) {
           ret = <ul className="nav navbar-nav">
             <li>
-              <a href="#" onClick={this.showPublicShows}>Результаты выставок</a>
+              <a href="/">Результаты выставок</a>
             </li>
             <li>
               <a href="#" onClick={this.showDogs}>Dogs</a>
@@ -59,7 +59,7 @@ class AdminMenu extends Component {
           </ul>
         }
         else ret = <ul className="nav navbar-nav"><li>
-          <a href="#" onClick={this.showPublicShows}>Результаты выставок</a>
+          <a href="/">Результаты выставок</a>
         </li></ul>
 
         return ret;

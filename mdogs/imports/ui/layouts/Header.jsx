@@ -8,7 +8,7 @@ export default Header = () => (
   <div className="container">
 
       <div className="navbar-header">
-        <a href="#" className="navbar-brand">Флэты России: База Данных</a>
+        <a href="/" className="navbar-brand">Флэты России: База Данных</a>
         <button className="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
           <span className="icon-bar"></span>
           <span className="icon-bar"></span>

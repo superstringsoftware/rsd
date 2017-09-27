@@ -102,7 +102,9 @@ const Results = new Mongo.Collection('PublicResults');
 // Ok, we have to build a pretty complex thing here because need to sort results
 // first by sex, then by class
 export const ResultsPublicTable = withTracker(({ id, sex }) => {
-    const resHandle = Meteor.subscribe('results.public', id);
+    var mid = new Mongo.ObjectID(id); // need this due to mess with ObjectIDs vs Strings
+    //console.log("Running results with id ", mid);
+    const resHandle = Meteor.subscribe('results.public', mid);
     const loading = !resHandle.ready();
 
     if (!loading) {
@@ -119,7 +121,7 @@ export const ResultsPublicTable = withTracker(({ id, sex }) => {
       //console.log(boys);
       return {
           results: boys,
-          show: Shows.findOne(id)
+          show: Shows.findOne(mid)
 
       };
     }
