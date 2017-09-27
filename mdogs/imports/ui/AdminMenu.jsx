@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import { createContainer } from 'meteor/react-meteor-data';
 
-import {PeopleAdminTable, DogsAdminTable, ShowsAdminTable, ResultsAdminTable, ShowsSelection} from './App.jsx';
+import {PeopleAdminTable, DogsAdminTable, ShowsAdminTable, ResultsAdminTable, ShowsSelection} from './AppOLD.jsx';
 import { ResultsShows } from './ResultsShows.jsx';
 
 import {ShowsPublicTable, ShowsPublicTableView} from './public/showsPage.jsx';

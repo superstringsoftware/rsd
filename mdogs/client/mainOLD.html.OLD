@@ -28,6 +28,55 @@
 
 </head>
 <body>
-<div id='root'></div>
-<div>{{>loginButtons}}</div>
+  <!-- top menu / navigation -->
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand">Флэты России: База Данных</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+
+          <div id="admin-menu"></div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">{{> loginButtons}}</a></li>
+
+          </ul>
+
+
+        </div>
+
+    </div>
+  </div>
+
+  <!-- main area -->
+  <div class="container">
+      <div class="row">
+
+          <div class="col-md-12">
+              <div id="render-target"></div>
+          </div>
+
+      </div>
+  </div>
+
+<!--
+  <footer class="footer">
+    <div class="container">
+
+      <p class="text-muted">&copy; J "X-Ray" Ho, 2017</p>
+    </div>
+  </footer>
+-->
+
+
+
+
+
 </body>

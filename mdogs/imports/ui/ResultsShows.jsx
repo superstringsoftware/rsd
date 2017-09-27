@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { ResultsAdminTable } from './App.jsx';
+import { ResultsAdminTable } from './AppOLD.jsx';
 import {Results, ResultEntity} from '../api/results';
 
 import SimpleCollection from './SimpleCollection';
