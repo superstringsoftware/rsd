@@ -45,7 +45,7 @@ class ResultLineComponent extends Component {
     return (
 
       <tr onClick={this.handleClick}>
-        <td>{this.props.item.dogName}</td>
+        <td><a href={'/dogs/' + this.props.item.dogID}>{this.props.item.dogName}</a></td>
         <td>{this.props.item.class}</td>
         <td>{mark}</td>
         <td>{place}</td>
