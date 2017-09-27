@@ -16,7 +16,7 @@ Meteor.publish('shows.all', function() {
   return Shows.find({});
 });
 
-// ok this is publishing a custom Collection with results combined with dog names
+// ok this is publishing a custom Collection 'PublicResults' with results combined with dog names
 Meteor.publish('results.public', function(id) {
   const results = Results.find({showID: id}, {sort: [ ["class", "asc"], ["place", "asc"] ] }).fetch();
 
