@@ -20,7 +20,7 @@ export default Header = () => (
         <div id="admin-menu"><AdminMenuComponent  /></div>
 
         <ul className="nav navbar-nav navbar-right">
-          <li><a href="#">login here</a></li>
+          <li><a href="#"></a></li>
 
         </ul>
 
