@@ -18,6 +18,12 @@ Meteor.publish('shows.all', function() {
   return Shows.find({});
 });
 
+// publishing all dogs for admin
+Meteor.publish('admin.dogs', function() {
+  return Dogs.find({});
+});
+
+
 // this is publishing a custom Collection 'PublicResults' with results combined with dog names
 Meteor.publish('results.public', function(id) {
   const results = Results.find({showID: id}, {sort: [ ["class", "asc"], ["place", "asc"] ] }).fetch();

@@ -40,11 +40,12 @@ class AdminMenu extends Component {
         //console.log(user);
         if ( (user != undefined) && (user.securityProfile != undefined) && (user.securityProfile.primaryRole === 'administrator')  ) {
           ret = <ul className="nav navbar-nav">
+          
             <li>
               <a href="/">Результаты выставок</a>
             </li>
             <li>
-              <a href="#" onClick={this.showDogs}>Dogs</a>
+              <a href="/admin/dogs">Dogs</a>
             </li>
             <li>
               <a href="#" onClick={this.showPeople}>People</a>
