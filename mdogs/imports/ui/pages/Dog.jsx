@@ -21,6 +21,21 @@ class SimpleDog extends Component {
   }
 }
 
+class SimplePerson extends Component {
+  constructor(props) {
+      super(props);
+      //console.log("Initializing One Dog page");
+      //console.log(props);
+  }
+
+  render() {
+    var p = People.findOne({_id: this.props.id});
+    //console.log(dog);
+    if (!p) p = {};
+      return (<span>{p.name}</span>);
+  }
+}
+
 class DogPage extends Component {
   constructor(props) {
       super(props);
@@ -39,44 +54,17 @@ class DogPage extends Component {
       <div className="content">
 
         <div className="row">
-
-          <div className="col-md-4 col-md-offset-2">
-            <div className="bs-component">
-              <div className="panel panel-info">
-                <div className="panel-heading">
-                  <h3 className="panel-title">отец</h3>
-                </div>
-                <div className="panel-body">
-                  <SimpleDog id={dog.fatherID} />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div className="bs-comonent">
-              <div className="panel panel-danger">
-                <div className="panel-heading">
-                  <h3 className="panel-title">мать</h3>
-                </div>
-                <div className="panel-body">
-                  <SimpleDog id={dog.motherID} />
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
           <div className="col-md-8 col-md-offset-2">
             <div className="panel panel-default">
               <div className="panel-heading"><strong>{dog.Name}</strong></div>
               <div className="panel-body">
                 окрас: {dog.color} <br/>
                 пол: {dog.sex} <br/>
-                дата рождения: {dog.dob}
+                дата рождения: {dog.dob} <br/>
+                отец: <SimpleDog id={dog.fatherID} /> <br/>
+                мать: <SimpleDog id={dog.motherID} /> <br/>
+                owner: <SimplePerson id={dog.ownerID} /> <br/>
+                breeder: <SimplePerson id={dog.breederID} />
               </div>
             </div>
           </div>

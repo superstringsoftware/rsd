@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 
 import { createContainer } from 'meteor/react-meteor-data';
 
-import {PeopleAdminTable, DogsAdminTable, ShowsAdminTable, ResultsAdminTable, ShowsSelection} from './AppOLD.jsx';
+//import {PeopleAdminTable, DogsAdminTable, ShowsAdminTable, ResultsAdminTable, ShowsSelection} from './AppOLD.jsx';
 import { ResultsShows } from './pages/admin/ResultsShows.jsx';
 
 import {ShowsPublicTable, ShowsPublicTableView} from './public/showsPage.jsx';
@@ -12,26 +12,6 @@ class AdminMenu extends Component {
     constructor(props) {
         super(props);
         //console.log(props);
-    }
-
-    showPublicShows(event) {
-        render(<ShowsPublicTable />, document.getElementById('render-target'));
-    }
-
-    showPeople(event) {
-        render(<PeopleAdminTable />, document.getElementById('render-target'));
-    }
-
-    showDogs(event) {
-        render(<DogsAdminTable />, document.getElementById('render-target'));
-    }
-
-    showShows(event) {
-        render(<ShowsAdminTable />, document.getElementById('render-target'));
-    }
-
-    showResults(event) {
-        render(<ShowsSelection />, document.getElementById('render-target'));
     }
 
     render() {
