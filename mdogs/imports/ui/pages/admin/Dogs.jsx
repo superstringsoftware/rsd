@@ -9,7 +9,8 @@ import SimpleCollection from '../../SimpleCollection.jsx';
 
 export default DogsAdminTable = withTracker(() => {
   const resHandle = Meteor.subscribe('admin.dogs');
-  const loading = !resHandle.ready();
+  const resHandle1 = Meteor.subscribe('admin.people');
+  const loading = !resHandle.ready() && !resHandle1.ready();
 
   return {
     entity: DogEntity,

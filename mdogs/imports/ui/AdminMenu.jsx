@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import {PeopleAdminTable, DogsAdminTable, ShowsAdminTable, ResultsAdminTable, ShowsSelection} from './AppOLD.jsx';
-import { ResultsShows } from './ResultsShows.jsx';
+import { ResultsShows } from './pages/admin/ResultsShows.jsx';
 
 import {ShowsPublicTable, ShowsPublicTableView} from './public/showsPage.jsx';
 
@@ -40,7 +40,7 @@ class AdminMenu extends Component {
         //console.log(user);
         if ( (user != undefined) && (user.securityProfile != undefined) && (user.securityProfile.primaryRole === 'administrator')  ) {
           ret = <ul className="nav navbar-nav">
-          
+
             <li>
               <a href="/">Результаты выставок</a>
             </li>
@@ -48,14 +48,14 @@ class AdminMenu extends Component {
               <a href="/admin/dogs">Dogs</a>
             </li>
             <li>
-              <a href="#" onClick={this.showPeople}>People</a>
+              <a href="/admin/people">People</a>
             </li>
               <li>
-                  <a href="#" onClick={this.showShows}>Shows</a>
+                  <a href="/admin/shows">Shows</a>
               </li>
 
               <li>
-                  <a href="#" onClick={this.showResults}>Results</a>
+                  <a href="/admin/results">Results</a>
               </li>
           </ul>
         }

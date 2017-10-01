@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
+import { createContainer, withTracker } from 'meteor/react-meteor-data';
 
-import { ResultsAdminTable } from './AppOLD.jsx';
-import {Results, ResultEntity} from '../api/results';
+import ResultsAdminTable from './Results.jsx';
+import {Results, ResultEntity} from '../../../api/results';
 
-import SimpleCollection from './SimpleCollection';
+import SimpleCollection from '../../SimpleCollection';
+
+import { Shows, ShowEntity } from '../../../api/shows.js';
 
 //import { EntityComponent } from '../../lib/spaceSteroids/EntityComponent.jsx';
 
@@ -70,7 +72,11 @@ export class ResultsShows extends Component {
     }
 }
 
-const ResultsTable = createContainer(({entity, showId, emptyItem}) => {
+const ResultsTable = withTracker(({entity, showId, emptyItem}) => {
+  const resHandle = Meteor.subscribe('admin.results', showId);
+  const resHandle1 = Meteor.subscribe('admin.dogs');
+  const loading = !resHandle.ready() && !resHandle1.ready();
+
     return {
         entity: entity,
         items: Results.find({showID: showId}, {sort: [ ["place", "asc"] ] }).fetch(),
@@ -78,4 +84,16 @@ const ResultsTable = createContainer(({entity, showId, emptyItem}) => {
         depItems: {
         },
     };
-}, SimpleCollection);
+}) (SimpleCollection);
+
+export const ShowsSelection = withTracker(() => {
+  const resHandle = Meteor.subscribe('admin.shows');
+  // const resHandle1 = Meteor.subscribe('admin.people');
+  const loading = !resHandle.ready();
+
+    return {
+        entity: ShowEntity,
+        items: loading ? [] : Shows.find({}, {sort: [ ["name", "asc"] ] }).fetch(),
+
+    };
+}) (ResultsShows);

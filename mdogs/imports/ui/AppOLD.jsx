@@ -6,7 +6,7 @@ import { Dogs, DogEntity } from '../api/dogs.js';
 import { People, PersonEntity } from '../api/people.js';
 import {Results, ResultEntity} from '../api/results';
 
-import {ResultsShows} from './ResultsShows.jsx';
+//import {ResultsShows} from './ResultsShows.jsx';
 
 import SimpleCollection from './SimpleCollection.jsx';
 
@@ -53,13 +53,6 @@ export const ResultsAdminTable = createContainer(() => {
     };
 }, SimpleCollection);
 
-export const ShowsSelection = createContainer(() => {
-    return {
-        entity: ShowEntity,
-        items: Shows.find({}, {sort: [ ["name", "asc"] ] }).fetch(),
-
-    };
-}, ResultsShows);
 
 // App component - represents the whole app
 // class App extends Component
