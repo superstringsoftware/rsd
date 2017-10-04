@@ -12,6 +12,8 @@ import ShowsAdminTable from '../pages/admin/Shows'
 import ResultsAdminTable from '../pages/admin/Results'
 import { ResultsShows, ShowsSelection } from '../pages/admin/ResultsShows'
 
+import LoginComponent from '../components/Login.jsx';
+
 
 export default Main = () => (
 
@@ -27,6 +29,7 @@ export default Main = () => (
              <Route exact path='/admin/people' component={PeopleAdminTable} />
              <Route exact path='/admin/shows' component={ShowsAdminTable} />
              <Route exact path='/admin/results' component={ShowsSelection} />
+             <Route exact path='/login' component={LoginComponent} />
              <Route component={NotFound} />
           </Switch>
         </div>
